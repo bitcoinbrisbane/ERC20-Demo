@@ -10,7 +10,9 @@ contract Parent {
         token = ERC20(erc20);
     }
 
-    function transferERC20(address to, uint256 value) public {
+    function transferERC20(address to, uint256 value) public returns (bool) {
         token.transfer(to, value);
+
+        return true;
     }
 }
