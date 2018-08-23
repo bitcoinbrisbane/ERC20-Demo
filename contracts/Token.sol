@@ -2,7 +2,6 @@ pragma solidity ^0.4.23;
 
 import "./ERC20.sol";
 import "./Ownable.sol";
-import "./SafeMath.sol";
 
 contract Token is Ownable, ERC20 {
     using SafeMath for uint;
