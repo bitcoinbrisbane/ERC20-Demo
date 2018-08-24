@@ -10,7 +10,7 @@ contract Parent {
         token = ERC20(erc20);
     }
 
-    function ERC20TotalSupply() public view returns(uint256) {
+    function ERC20TotalSupply() external view returns(uint256) {
         return token.totalSupply();
     }
 

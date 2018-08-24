@@ -13,7 +13,7 @@ contract("Parent", function(accounts) {
   });
 
   it("should get total supply from child contract", async function () {
-    const actual = await this.parent.transferERC20();
+    const actual = await this.parent.ERC20TotalSupply();
   });
 
   it("should transfer from child contract", async function () {
