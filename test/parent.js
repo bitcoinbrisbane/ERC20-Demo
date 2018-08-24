@@ -17,6 +17,7 @@ contract("Parent", function(accounts) {
   });
 
   it("should transfer from child contract", async function () {
-    const actual = await this.parent.transferERC20(accounts[1], 1);
+    const actual = await this.parent.ERC20TotalSupply();
+    assert.equal(actual.valueOf(), 100000000, "Total supply should be 100000000");
   });
 });
