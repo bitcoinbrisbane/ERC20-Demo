@@ -12,6 +12,10 @@ contract("Parent", function(accounts) {
       this.parent = await Parent.new(address, {from: accounts[0]});
   });
 
+  it("should get total supply from child contract", async function () {
+    const actual = await this.parent.transferERC20();
+  });
+
   it("should transfer from child contract", async function () {
     const actual = await this.parent.transferERC20(accounts[1], 1);
   });
