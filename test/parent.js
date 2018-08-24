@@ -14,10 +14,12 @@ contract("Parent", function(accounts) {
 
   it("should get total supply from child contract", async function () {
     const actual = await this.parent.ERC20TotalSupply();
+    assert.equal(actual.valueOf(), 100000000, "Total supply should be 100000000");
   });
 
   it("should transfer from child contract", async function () {
-    const actual = await this.parent.ERC20TotalSupply();
-    assert.equal(actual.valueOf(), 100000000, "Total supply should be 100000000");
+    await this.parent.transferERC20(accounts[1], 1);
+    const actual = await this.token.balanceOf(accounts[1]);
+    assert.equal(actual.valueOf(), 1, "Account 1 balance should be 1");
   });
 });
