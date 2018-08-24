@@ -4,7 +4,6 @@ import "./ERC20.sol";
 import "./Ownable.sol";
 
 contract Token is Ownable, ERC20 {
-    using SafeMath for uint;
 
     // Public variables of the token
     string public name = "Token";
@@ -27,10 +26,10 @@ contract Token is Ownable, ERC20 {
     
     function transfer(address to, uint256 value) external returns (bool) {
         require(to != 0x0, "Cannot be zero address");
-        require(balances[msg.sender].add(value) >= balances[msg.sender]);
+        require(balances[msg.sender] + value >= balances[msg.sender]);
 
-        balances[msg.sender] = balances[msg.sender].sub(value);
-        balances[to] = balances[to].add(value);
+        balances[msg.sender] -= value;
+        balances[to] += value;
         emit Transfer(msg.sender, to, value);
 
         return true;
@@ -44,9 +43,9 @@ contract Token is Ownable, ERC20 {
         require(to != 0x0, "Cannot be zero address");
         require(balances[from] >= value && allowed[from][msg.sender] >= value);
 
-        balances[from] = balances[from].sub(value);
-        allowed[from][msg.sender] = allowed[from][msg.sender].sub(value);
-        balances[to] = balances[to].add(value);
+        balances[from] -= value;
+        allowed[from][msg.sender] -= value;
+        balances[to] += value;
 
         emit Transfer(from, to, value);
         return true;
