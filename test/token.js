@@ -32,6 +32,20 @@ contract("Token", function(accounts) {
     assert.equal(actual.valueOf(), 1337, "Balance should be 1337");
   });
 
+  it("should transfer 100 tokens from account 1", async function () {
+    await this.token.transfer(accounts[1], 100);
+    var actual = await this.token.balanceOf(accounts[1]);
+    assert.equal(actual.valueOf(), 100, "Balance of account 1 should be 100");
+
+    actual = await this.token.balanceOf(accounts[2]);
+    assert.equal(actual.valueOf(), 0, "Balance of account 2 should be 0");
+
+    await this.token.transfer(accounts[2], 10, {from: accounts[1]});
+
+    actual = await this.token.balanceOf(accounts[2]);
+    assert.equal(actual.valueOf(), 10, "Balance of account 2 should be 10");
+  });
+
   it("owner should allow alice to transfer 100 tokens to bob from owner", async function () {
     //account 0 (owner) approves alice
     const owner = accounts[0];
