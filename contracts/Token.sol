@@ -41,7 +41,7 @@ contract Token is Ownable, ERC20 {
 
     function transferFrom(address from, address to, uint256 value) external returns (bool success) {
         require(to != 0x0, "Cannot be zero address");
-        require(balances[from] >= value && allowed[from][msg.sender] >= value);
+        //require(balances[from] >= value && allowed[from][msg.sender] >= value);
 
         balances[from] -= value;
         allowed[from][msg.sender] -= value;

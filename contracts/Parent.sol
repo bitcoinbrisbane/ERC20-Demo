@@ -15,7 +15,8 @@ contract Parent {
     }
 
     function transferERC20(address to, uint256 value) public returns (bool) {
-        token.transfer(to, value);
+        //token.approve(this, value);
+        token.transferFrom(msg.sender, to, value);
 
         return true;
     }
